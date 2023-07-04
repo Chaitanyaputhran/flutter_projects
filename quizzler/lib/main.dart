@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'quiz_brain.dart';
 import 'question.dart';
 
 void main() => runApp(Quizzler());
@@ -6,14 +7,13 @@ void main() => runApp(Quizzler());
 class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    QuizBrain quizBrain = QuizBrain(context); // Pass the context here
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: QuizPage(),
-          ),
+          child: QuizPage(),
         ),
       ),
     );
@@ -26,9 +26,40 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Widget> scorekeeper = [];
+  List<Widget> scoreKeeper = [];
 
-  int questionNumber=0;
+  late QuizBrain quizBrain;
+
+  @override
+  void initState() {
+    super.initState();
+    quizBrain = QuizBrain(context); // Pass the context here as well
+  }
+
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer(0);
+    if (userPickedAnswer == correctAnswer) {
+      print('User got it right');
+      scoreKeeper.add(
+        const Icon(
+          Icons.check,
+          color: Colors.green,
+        ),
+      );
+    } else {
+      print('User got it wrong');
+      scoreKeeper.add(
+        const Icon(
+          Icons.close,
+          color: Colors.red,
+        ),
+      );
+    }
+    setState(() {
+      quizBrain.nextQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,9 +72,9 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(0),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
@@ -53,46 +84,33 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.pinkAccent,
               ),
-              child: Text(
+              child: const Text(
                 'True',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
                 ),
               ),
-
               onPressed: () {
-                bool correctAnswer = questionBank[questionNumber].questionAnswer;
-                if (correctAnswer == true){
-                  print("user got it right");
-                }
-                else{
-                  print("the user got it wrong");
-                }
-                setState(() {
-                  questionNumber++;
-                });
-
+                checkAnswer(true);
               },
-
             ),
           ),
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.redAccent,
               ),
-              child: Text(
+              child: const Text(
                 'False',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -100,32 +118,15 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questionBank[questionNumber].questionAnswer;
-                if (correctAnswer == false){
-                  print("user got it right");
-                }
-                else{
-                  print("the user got it wrong");
-                }
-                setState(() {
-                  questionNumber++;
-                });
-
+                checkAnswer(false);
               },
             ),
           ),
         ),
         Row(
-          children: scorekeeper ,
-
+          children: scoreKeeper,
         ),
       ],
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
