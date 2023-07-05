@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+const bottomContainerHeight= 80.0;
+const activeCardColor =Color(0xFF1D1E33);
+const bottomContainerColour = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
   @override
@@ -19,67 +22,67 @@ class _InputPageState extends State<InputPage> {
             child:Row(
               children:<Widget>[
                 Expanded(
-                    child:Container(
-                      margin:EdgeInsets.all(15.0),
-
-                      decoration:BoxDecoration(
-                        color: Color(0xFF1D1E33),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
+                    child:ResuableCard(
+          colour: activeCardColor,
+      ),
                 ),
                 Expanded(
-                    child:Container(
-                      margin:EdgeInsets.all(15.0),
-
-                      decoration:BoxDecoration(
-                        color: Color(0xFF1D1E33),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
+                    child:ResuableCard(
+                      colour: activeCardColor,
+                ),
                 ),
               ],
             ),
           ),
 
           Expanded(
-              child:Container(
-                margin:EdgeInsets.all(15.0),
-
-                decoration:BoxDecoration(
-                  color: Color(0xFF1D1E33),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
+              child:ResuableCard(
+                colour: activeCardColor,
+    ),
           ),
           Expanded(
             child:Row(
               children:<Widget>[
                 Expanded(
-                    child:Container(
-                      margin:EdgeInsets.all(15.0),
-
-                      decoration:BoxDecoration(
-                        color: Color(0xFF1D1E33),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+                    child:ResuableCard(
+                      colour: activeCardColor,
                     ),
                 ),
                 Expanded(
-                    child:Container(
-                      margin:EdgeInsets.all(15.0),
-
-                      decoration:BoxDecoration(
-                        color: Color(0xFF1D1E33),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
+                    child:ResuableCard(
+                      colour: activeCardColor,
+                ),
                 ),
               ],
             ),
           ),
+          Container(
+            color: bottomContainerColour,
+            margin: EdgeInsets.only(top:10.0),
+            width:double.infinity,
+            height:bottomContainerHeight,
+
+          )
         ]
       )
     );
   }
 }
+
+class ResuableCard extends StatelessWidget {
+  ResuableCard({required this.colour});
+  final Color colour;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin:EdgeInsets.all(15.0),
+
+      decoration:BoxDecoration(
+        color: colour,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    );
+  }
+}
+
