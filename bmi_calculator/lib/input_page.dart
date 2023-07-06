@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import'icon_content.dart';
 import'reusable_dart.dart';
 import 'constants.dart';
+import 'results_page.dart';
 enum Gender{
   male,
   female,
@@ -199,6 +200,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           TextButton(
+
             child: Container(
               child:Center(
                 child: Text('Calculate',
@@ -214,7 +216,7 @@ class _InputPageState extends State<InputPage> {
 
             ),
             onPressed: (){
-              print("button is pressed");
+             Navigator.push(context, MaterialPageRoute (builder: (context) => ResultsPage()));
 
             },
           )
