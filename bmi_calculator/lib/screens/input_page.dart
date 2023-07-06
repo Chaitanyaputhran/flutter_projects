@@ -7,6 +7,7 @@ import '../constants.dart';
 import 'results_page.dart';
 import '../bottom_button.dart';
 import '../components/round_icon.dart';
+import 'package:bmi_calculator/functionality.dart';
 enum Gender{
   male,
   female,
@@ -203,6 +204,8 @@ class _InputPageState extends State<InputPage> {
           ),
           BottomButton(buttonTitle: 'CALCULATE',
           onPressed: (){
+            Functionality func =Functionality(weight: weight, height: height);
+
             Navigator.push(context,
             MaterialPageRoute(builder:(context) => ResultsPage()));
           },)

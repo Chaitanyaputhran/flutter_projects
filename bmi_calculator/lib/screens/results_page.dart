@@ -4,7 +4,10 @@ import '../constants.dart';
 import'../components/reusable_dart.dart';
 import '../bottom_button.dart';
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+  ResultsPage({required this.bmiResult,required this.interpretation,required this.resultText});
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
 
   @override
   Widget build(BuildContext context) {
