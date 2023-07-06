@@ -7,6 +7,10 @@ const bottomContainerHeight= 80.0;
 const activeCardColor =Color(0xFF1D1E33);
 const inactiveCardColor=Color(0xFF111328);
 const bottomContainerColour = Color(0xFFEB1555);
+enum Gender{
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -17,9 +21,9 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColour = inactiveCardColor;
   Color femaleCardColour = inactiveCardColor;
 //if 1=male 2=female
-  void updateColour(int gender){
+  void updateColour(Gender SelectedGender){
     //male card is pressed
-    if(gender ==1){
+    if(SelectedGender ==Gender.male){
       if (maleCardColour==inactiveCardColor){
         maleCardColour=activeCardColor;
         femaleCardColour=inactiveCardColor;
@@ -28,7 +32,7 @@ class _InputPageState extends State<InputPage> {
         maleCardColour=inactiveCardColor;
     }
   }
-    if(gender ==2){
+    if(SelectedGender ==Gender.female){
       if (femaleCardColour==inactiveCardColor){
         femaleCardColour=activeCardColor;
         maleCardColour=inactiveCardColor;
@@ -54,7 +58,7 @@ class _InputPageState extends State<InputPage> {
                     child:GestureDetector(
 onTap: (){
   setState(() {
-    updateColour(1);
+    updateColour(Gender.male);
   });
 },
                       child: ResuableCard(
@@ -70,7 +74,7 @@ onTap: (){
                     child:GestureDetector(
                       onTap: (){
                         setState(() {
-                          updateColour(2);
+                          updateColour(Gender.female);
                         });
                       },
                       child: ResuableCard(
@@ -109,12 +113,25 @@ onTap: (){
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColour,
-            margin: EdgeInsets.only(top:10.0),
-            width:double.infinity,
-            height:bottomContainerHeight,
+          TextButton(
+            child: Container(
+              child:Center(
+                child: Text('Calculate',
+                style:TextStyle(
+                color:Colors.white,
+                  fontSize: 25.0,
+    ),),
+              ),
+              color: bottomContainerColour,
+              margin: EdgeInsets.only(top:10.0),
+              width:double.infinity,
+              height:bottomContainerHeight,
 
+            ),
+            onPressed: (){
+              print("button is pressed");
+
+            },
           )
         ]
       )
