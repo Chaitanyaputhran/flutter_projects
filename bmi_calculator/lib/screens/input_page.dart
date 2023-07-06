@@ -207,7 +207,12 @@ class _InputPageState extends State<InputPage> {
             Functionality func =Functionality(weight: weight, height: height);
 
             Navigator.push(context,
-            MaterialPageRoute(builder:(context) => ResultsPage()));
+            MaterialPageRoute(builder:(context) => ResultsPage(
+              bmiResult: func.calculateBMI(),
+              resultText: func.getResult(),
+              interpretation: func.getInterpretation(),
+
+            )));
           },)
         ]
       )

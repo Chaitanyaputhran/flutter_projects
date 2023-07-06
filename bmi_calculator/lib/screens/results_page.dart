@@ -21,8 +21,10 @@ class ResultsPage extends StatelessWidget {
         children:<Widget>[
           Expanded(
             child:Container(
-              child:Text('Your Result',
-                style:kTitleText,
+              child:Center(
+                child: Text('Your Result',
+                  style:kTitleText,
+                ),
               ),
 
             ),
@@ -36,14 +38,14 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children:<Widget>[
                   Text(
-                    'Normal',
+                    resultText.toUpperCase(),
                     style:kresultTextStyle,
                   ),
                   Text(
-                    '12',
+                    bmiResult,
                     style:kBMITextStyle,
                   ),
-                  Text('Your BMI result is quite low ,you should eat more!',
+                  Text(interpretation,
                   textAlign:TextAlign.center,
                     style:kBodyTextStyle,),
 

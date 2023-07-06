@@ -23,12 +23,12 @@ class Functionality{
   }
   String getInterpretation(){
     if(_bmi >= 25){
-      return 'Overweight';
+      return 'You are overweight.Exercise!!';
     }
     else if(_bmi > 18.5 ){
-      return 'Normal';
+      return 'You are fit and fine .Good job!!';
     }else{
-      return 'Underweight';
+      return 'You are Underweight.Eat well!!';
     }
   }
 }
