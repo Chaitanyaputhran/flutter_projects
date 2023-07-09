@@ -11,10 +11,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState(){
     super.initState();
     getLocation();
+    print('this line of code is triggered');
   }
   void getLocation() async{
     Location location = Location();
     await location.getCurrentLocation();
+    print(location.latitude);
+    print(location.longitude);
 }
   void somethingThatExpectsLessThan10(int n){
     if (n>10){
