@@ -75,10 +75,15 @@ setState(() {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context){
+                    onPressed: ()async {
+                     var typedName= await Navigator.push(context,MaterialPageRoute(builder: (context){
                        return CityScreen();
                       }));
+                     if(typedName != null){
+                     var weatherData=await  weather.getLocationWeather();
+                     updateUI(weatherData);
+
+                     }
                     },
                     child: Icon(
                       Icons.location_city,
