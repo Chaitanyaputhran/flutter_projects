@@ -23,6 +23,13 @@ late String weatherMessage;
   }
   void updateUI(dynamic weatherData){
 setState(() {
+  if (weatherData == null ){
+    temperature=0;
+    weatherIcon='Error';
+    weatherMessage='unable to get weather data';
+    cityName='';
+    return;
+  }
   double temp= weatherData['main']['temp'];
   temperature = temp.toInt();
 
@@ -57,7 +64,10 @@ setState(() {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async{
+                      var weatherData = await weather.getLocationWeather();
+                      updateUI(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
